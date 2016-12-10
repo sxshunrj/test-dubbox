@@ -1,0 +1,79 @@
+<settings>
+<servers>
+  <server>
+    <id>releases</id>
+    <username>smallworld</username>
+    <password>smallworld</password>
+  </server>
+  <server>
+    <id>snapshots</id>
+    <username>smallworld</username>
+    <password>smallworld</password>
+  </server>  
+</servers>
+
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://sworld.space:8081/nexus/content/groups/public</url>
+    </mirror>
+	<mirror>
+      <!--This is used to direct the public snapshots repo in the 
+          profile below over to a different nexus group -->
+      <id>nexus-public-snapshots</id>
+      <mirrorOf>public-snapshots</mirrorOf>
+	  <url>http://sworld.space:8081/nexus/content/repositories/snapshots/</url>
+    </mirror>
+  </mirrors>
+  
+  <localRepository>D:/.m2/repository</localRepository>
+  
+  <profiles>
+    <profile>
+      <id>development</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <!--this profile will allow snapshots to be searched when activated-->
+      <id>public-snapshots</id>
+      <repositories>
+        <repository>
+          <id>public-snapshots</id>
+          <url>http://public-snapshots</url>
+          <releases><enabled>false</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>public-snapshots</id>
+          <url>http://public-snapshots</url>
+          <releases><enabled>false</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>development</activeProfile>
+    <activeProfile>public-snapshots</activeProfile>
+  </activeProfiles>
+</settings>
+

@@ -7,8 +7,10 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <dubbo:protocol name="rest" server="tomcat" port="8080" />
 
-    <dubbo:protocol name="rest" server="tomcat" port="9090" />
-
-
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.sxshunrj.test.dubbo.service.UserService" ref="userService"/>
+	<!-- 和本地bean一样实现服务 -->
+	<bean id="userService" class="com.sxshunrj.test.dubbo.service.impl.UserServiceImpl" />
 </beans>
